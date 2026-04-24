@@ -32,14 +32,21 @@ if [ ! -f "/var/lib/mysql/mysql.ibd" ]; then
 fi
 chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 
-# Configura senha root (apenas primeira vez)
+# Configura senha root e phpMyAdmin (apenas primeira vez)
 if [ ! -f "/var/lib/mysql/.password_set" ]; then
-    echo "Configurando senha root..."
+    echo "Configurando MySQL..."
     for i in {1..30}; do
         if mysql -u root -e "SELECT 1" >/dev/null 2>&1; then
+            # Configura senha root
             mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;"
+            
+            # Cria banco phpMyAdmin
+            mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS phpmyadmin;"
+            mysql -u root -proot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
+            mysql -u root -proot -e "GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'root'@'localhost'; FLUSH PRIVILEGES;"
+            
             touch /var/lib/mysql/.password_set
-            echo "Senha configurada"
+            echo "MySQL configurado"
             break
         fi
         sleep 1
