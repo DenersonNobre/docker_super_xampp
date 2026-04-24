@@ -1,0 +1,20 @@
+services:
+  super-xampp:
+    build: .
+    image: dnoi/super-xampp:1.0.0    
+    container_name: super_xampp
+    restart: always
+    ports:
+      - "80:80"
+      - "3306:3306"
+      - "8080:8080"
+      - "3000:3000"
+    volumes:
+      - A:/Htdocs:/var/www/html
+      - A:/Desenvolvimento/Docker/xampp_server/config/server.js:/var/www/html/server.js:ro
+      - A:/Desenvolvimento/Docker/xampp_server/mysql_data:/var/lib/mysql
+      - A:/Desenvolvimento/Docker/xampp_server/tomcat_webapps:/opt/tomcat/webapps
+
+volumes:
+  mysql_data:
+  tomcat_webapps:
