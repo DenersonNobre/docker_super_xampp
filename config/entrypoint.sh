@@ -32,6 +32,20 @@ if [ ! -f "/var/lib/mysql/mysql.ibd" ]; then
 fi
 chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 
+# Configura senha root (apenas primeira vez)
+if [ ! -f "/var/lib/mysql/.password_set" ]; then
+    echo "Configurando senha root..."
+    for i in {1..30}; do
+        if mysql -u root -e "SELECT 1" >/dev/null 2>&1; then
+            mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;"
+            touch /var/lib/mysql/.password_set
+            echo "Senha configurada"
+            break
+        fi
+        sleep 1
+    done
+fi
+
 # Start node before supervisord
 nohup node /var/www/html/server.js > /var/log/node.log 2>&1 &
 sleep 2
