@@ -35,8 +35,7 @@ xampp_server/
 │   ├── server.js          # Servidor Node.js (API)
 │   ├── supervisord.conf  # Supervisor config
 │   └── sql-scripts/       # Scripts SQL
-├── htdocs/               # Documentos Apache
-│   └── index.html         # Página principal
+├── htdocs/               # Documentos Apache (páginas do Super XAMPP)
 ├── tomcat_webapps/        # Aplicações Tomcat
 ├── mysql_data/            # Dados MySQL (persistidos)
 ├── Dockerfile
@@ -52,12 +51,12 @@ xampp_server/
 ## Node.js API Endpoints
 
 | Método | Endpoint               | Descrição           |
-|--------|----------------------|---------------------|
-| GET    | /                    | Página da API       |
-| GET    | /api/status           | Status do servidor  |
-| GET    | /api/health           | Health check        |
-| GET    | /api/info             | Informações do sistema |
-| GET    | /api/endpoints        | Lista de endpoints  |
+|--------|------------------------|---------------------|
+| GET    | /                      | Página da API       |
+| GET    | /api/status             | Status do servidor  |
+| GET    | /api/health             | Health check        |
+| GET    | /api/info               | Informações do sistema |
+| GET    | /api/endpoints          | Lista de endpoints  |
 
 ## Uso
 
@@ -88,9 +87,10 @@ docker exec super_xampp mysql -u root -proot
 
 ## Volumes
 
-- `A:/Htdocs` → `/var/www/html` (Apache)
 - `./mysql_data` → `/var/lib/mysql` (MySQL)
 - `./tomcat_webapps` → `/opt/tomcat/webapps` (Tomcat)
+
+**Nota**: `htdocs/` não é montado como volume. Os arquivos ficam dentro do container.
 
 ## Tecnologias
 

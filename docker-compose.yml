@@ -10,8 +10,6 @@ services:
       - "8080:8080"
       - "3000:3000"
     volumes:
-      - A:/Htdocs:/var/www/html
-      - A:/Desenvolvimento/Docker/xampp_server/config/server.js:/var/www/html/server.js:ro
       - A:/Desenvolvimento/Docker/xampp_server/mysql_data:/var/lib/mysql
       - A:/Desenvolvimento/Docker/xampp_server/tomcat_webapps:/opt/tomcat/webapps
 

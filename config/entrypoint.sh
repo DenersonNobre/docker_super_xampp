@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# phpMyAdmin link and config
-ln -sf /usr/share/phpmyadmin /var/www/html/phpmyadmin
+# phpMyAdmin config
 
 cat > /etc/phpmyadmin/config-db.php << 'EOF'
 <?php
