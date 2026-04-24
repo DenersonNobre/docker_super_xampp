@@ -3,9 +3,8 @@
 # phpMyAdmin link and config
 ln -sf /usr/share/phpmyadmin /var/www/html/phpmyadmin
 
-cat > /etc/phpmyadmin/config-db.php << 'PHPEOF'
+cat > /etc/phpmyadmin/config-db.php << 'EOF'
 <?php
-$cfg['blowfish_secret'] = 'super_xampp_secret_key_2024';
 $dbuser='root';
 $dbpass='root';
 $basepath='';
@@ -13,21 +12,14 @@ $dbname='phpmyadmin';
 $dbserver='127.0.0.1';
 $dbport='3306';
 $dbtype='mysql';
-PHPEOF
+EOF
 
-cat > /etc/phpmyadmin/conf.d/override.php << 'PHPEOF'
+cat > /etc/phpmyadmin/conf.d/override.php << 'EOF'
 <?php
 $cfg['Servers'][$i]['host'] = '127.0.0.1';
 $cfg['Servers'][$i]['socket'] = '';
 $cfg['Servers'][$i]['connect_type'] = 'tcp';
-// Auto-login config
-$cfg['Servers'][$i]['auth_type'] = 'config';
-$cfg['Servers'][$i]['user'] = 'root';
-$cfg['Servers'][$i]['password'] = 'root';
-// Session settings
-$cfg['LoginCookieValidity'] = 3600 * 24; // 24 hours
-$cfg['SessionGC-maxlifetime'] = 3600 * 24;
-PHPEOF
+EOF
 
 # MySQL directories
 mkdir -p /var/run/mysqld
