@@ -1,23 +1,18 @@
 # Super XAMPP - Documentação
 
-## Como Usar Esta Documentação
-
-### Para Recriar do Zero
+## Como Usar
 
 Esta documentação contém **prompts sequenciais** que guiam a criação do Super XAMPP do absoluto zero.
 
-1. **Comece aqui:** Leia `PROMPTS-README.md`
-2. **Siga em ordem:** PROMPT-01 → PROMPT-02 → ... → PROMPT-11
-3. **Teste:** Execute os testes ao final
-
-### Estrutura
+### Estrutura Final
 
 ```
 docs/
-├── README.md              ← (este) Visão geral
-├── PROMPTS-README.md      ← Como usar os prompts
-├── PROMPT-01-FUNDACAO.md  ← 1. Criar estrutura
-├── PROMPT-02-DOCKERFILE.md
+├── README.md               ← (este) Visão geral
+├── PROMPTS-README.md       ← Como usar os prompts
+├── SETUP-GIT.md            ← Setup Git (importante!)
+├── PROMPT-01-FUNDACAO.md   ← 1. Criar estrutura
+├── PROMPT-02-DOCKERFILE.md ← 2. Dockerfile
 ├── PROMPT-03-DOCKER-COMPOSE.md
 ├── PROMPT-04-SUPERVISOR.md
 ├── PROMPT-05-ENTRYPOINT.md
@@ -27,28 +22,31 @@ docs/
 ├── PROMPT-09-TOMCAT.md
 ├── PROMPT-10-LANDING-PAGE.md
 ├── PROMPT-11-TESTES.md
-├── SETUP-GIT.md           ← Setup Git
-├── 00-PLANO-EXECUCAO.md   ← Visão geral do projeto
-├── 05-ETAPA-DEBUGGING.md  ← Solução de problemas
-├── test.sh                ← Script de testes
-└── test-host.ps1          ← Testes Windows
+├── test.sh                 ← Testes dentro do container
+└── test-host.ps1           ← Testes no host Windows
 ```
 
-### Fluxo de Prompts
+### Fluxo
 
 ```
-FUNDACAO → DOCKERFILE → COMPOSE → SUPERVISOR → ENTRYPOINT → MYSQL → APACHE → NODEJS → TOMCAT → LANDING → TESTES
-    ↓           ↓           ↓           ↓            ↓          ↓        ↓         ↓        ↓         ↓        ↓
- Estrutura   Imagem      Volumes   Processos     Init      TCP/IP   HTTP      API      Java     UI      Verifica
+SETUP-GIT → PROMPT-01 → ... → PROMPT-11 → Testes
+    ↓
+Config Git antes de começar
 ```
 
-### Para IA
+### Comece Por
 
-Uma IA pode seguir estes prompts para recriar o projeto. Cada prompt contém:
+1. Leia `SETUP-GIT.md` (setup do repositório Git)
+2. Leia `PROMPTS-README.md` (como usar os prompts)
+3. Siga `PROMPT-01-FUNDACAO.md` até `PROMPT-11-TESTES.md`
+
+### Para Recriar do Zero
+
+Uma IA pode seguir os prompts sequenciais para recriar todo o projeto. Cada prompt contém:
 - **Contexto** - Por que estamos fazendo isso
 - **Tarefa** - O que criar/copiar
 - **Verificação** - Como testar
-- **Próximo passo** - Continuação natural
+- **Próximo passo** - Continuação
 
 ### Referência Rápida
 

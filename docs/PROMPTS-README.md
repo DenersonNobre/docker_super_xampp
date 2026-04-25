@@ -7,9 +7,9 @@ Estes prompts guiam uma IA (ou desenvolvedor) através da criação completa do 
 ## Fluxo de Prompts
 
 ```
-PROMPT 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10 → 11
-   ↓        ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓
-Fundação  Docker Compose Entrypoint  MySQL    Apache  Node.js Tomcat phpMyAdmin Testes
+SETUP-GIT → PROMPT-01 → PROMPT-02 → ... → PROMPT-11 → Testes
+    ↓
+ Config Git (leia primeiro!)
 ```
 
 ## Visão Geral do Projeto
