@@ -1,82 +1,56 @@
-# Como Recriar Este Projeto do Zero
+# Super XAMPP - Documentação
 
-## Para IA ou Desenvolvedor
+## Como Usar Esta Documentação
 
-### Comece Aqui
+### Para Recriar do Zero
+
+Esta documentação contém **prompts sequenciais** que guiam a criação do Super XAMPP do absoluto zero.
+
+1. **Comece aqui:** Leia `PROMPTS-README.md`
+2. **Siga em ordem:** PROMPT-01 → PROMPT-02 → ... → PROMPT-11
+3. **Teste:** Execute os testes ao final
+
+### Estrutura
 
 ```
 docs/
-├── templates/              ← Arquivos prontos para copiar
-│   ├── Dockerfile
-│   ├── docker-compose.yml
-│   ├── config/
-│   │   ├── entrypoint.sh
-│   │   ├── my.cnf
-│   │   ├── supervisord.conf
-│   │   └── server.js
-│   ├── htdocs/super-xampp/
-│   │   └── index.html
-│   ├── test.sh
-│   └── test-host.ps1
-├── SETUP-GIT.md            ← Setup Git
-└── README.md               ← (este)
+├── README.md              ← (este) Visão geral
+├── PROMPTS-README.md      ← Como usar os prompts
+├── PROMPT-01-FUNDACAO.md  ← 1. Criar estrutura
+├── PROMPT-02-DOCKERFILE.md
+├── PROMPT-03-DOCKER-COMPOSE.md
+├── PROMPT-04-SUPERVISOR.md
+├── PROMPT-05-ENTRYPOINT.md
+├── PROMPT-06-MYSQL.md
+├── PROMPT-07-APACHE.md
+├── PROMPT-08-NODEJS.md
+├── PROMPT-09-TOMCAT.md
+├── PROMPT-10-LANDING-PAGE.md
+├── PROMPT-11-TESTES.md
+├── SETUP-GIT.md           ← Setup Git
+├── 00-PLANO-EXECUCAO.md   ← Visão geral do projeto
+├── 05-ETAPA-DEBUGGING.md  ← Solução de problemas
+├── test.sh                ← Script de testes
+└── test-host.ps1          ← Testes Windows
 ```
 
-### Passo a Passo
-
-1. **Criar pasta do projeto**
-   ```bash
-   mkdir super-xampp && cd super-xampp
-   mkdir config htdocs/super-xampp mysql_data
-   ```
-
-2. **Copiar arquivos de `docs/templates/`**
-
-3. **Build**
-   ```bash
-   docker-compose build
-   docker-compose up -d
-   ```
-
-4. **Aguardar** (MySQL demora ~30s para iniciar)
-   ```bash
-   sleep 30
-   ```
-
-5. **Testar**
-   ```bash
-   docker exec super_xampp /test.sh
-   ```
-
-### O Que Está Incluído
-
-- ✅ Ubuntu 22.04 base
-- ✅ Apache2 + PHP
-- ✅ MySQL 8.x com TCP remoto
-- ✅ Node.js 24.x API
-- ✅ Tomcat 11.x
-- ✅ phpMyAdmin
-- ✅ Landing page Bootstrap 5
-- ✅ Scripts de teste
-
-### Estrutura Final
+### Fluxo de Prompts
 
 ```
-super-xampp/
-├── config/
-│   ├── entrypoint.sh
-│   ├── my.cnf
-│   ├── supervisord.conf
-│   └── server.js
-├── htdocs/super-xampp/
-│   └── index.html
-├── Dockerfile
-├── docker-compose.yml
-├── .gitignore
-└── mysql_data/
+FUNDACAO → DOCKERFILE → COMPOSE → SUPERVISOR → ENTRYPOINT → MYSQL → APACHE → NODEJS → TOMCAT → LANDING → TESTES
+    ↓           ↓           ↓           ↓            ↓          ↓        ↓         ↓        ↓         ↓        ↓
+ Estrutura   Imagem      Volumes   Processos     Init      TCP/IP   HTTP      API      Java     UI      Verifica
 ```
 
-### Serviços e Portas
+### Para IA
+
+Uma IA pode seguir estes prompts para recriar o projeto. Cada prompt contém:
+- **Contexto** - Por que estamos fazendo isso
+- **Tarefa** - O que criar/copiar
+- **Verificação** - Como testar
+- **Próximo passo** - Continuação natural
+
+### Referência Rápida
 
 | Serviço | Porta | URL |
 |---------|-------|-----|
@@ -86,12 +60,4 @@ super-xampp/
 | Tomcat | 8080 | http://localhost:8080 |
 | phpMyAdmin | - | http://localhost/phpmyadmin |
 
-### Credenciais
-
-- **MySQL root**: `root` / `root`
-- **MySQL Workbench**: conecta em `localhost:3306`
-- **phpMyAdmin**: `root` / `root`
-
-### Problemas?
-
-Consulte [05-ETAPA-DEBUGGING.md](05-ETAPA-DEBUGGING.md)
+**Credenciais:** root / root
