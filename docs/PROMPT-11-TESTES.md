@@ -109,4 +109,4 @@ Se todos os testes passaram, parabens! O Super XAMPP está funcionando.
 2. Push para repositório
 3. Adicionar mais funcionalidades
 
-Ver [07-CHECKLIST.md](07-CHECKLIST.md) para verificação completa.
+Ver [test.sh](test.sh) para verificação completa.
