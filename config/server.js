@@ -2,7 +2,7 @@ const http = require('http');
 
 const PORT = 3000;
 
-const HTML_CONTENT = `<!DOCTYPE html>
+const HTML = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -13,255 +13,119 @@ const HTML_CONTENT = `<!DOCTYPE html>
     <style>
         :root {
             --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #64748b;
-            --dark: #0f172a;
-            --dark-light: #1e293b;
-            --light: #f8fafc;
             --success: #22c55e;
-            --info: #3b82f6;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
         }
-        body {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
-            min-height: 100vh;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        body { background: var(--bg); font-family: system-ui, sans-serif; color: var(--text); }
+        .header { text-align: center; padding: 60px 0 40px; }
+        .logo {
+            width: 64px; height: 64px;
+            background: linear-gradient(135deg, #41a54e, #2d7a35);
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; font-size: 28px;
         }
-        .hero-section {
-            padding: 60px 0;
-            text-align: center;
-            background: linear-gradient(180deg, rgba(65, 165, 94, 0.1) 0%, transparent 100%);
+        h1 { font-size: 2rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .subtitle { color: var(--text-muted); }
+        .status {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 8px 20px; border-radius: 50px; margin-top: 20px;
+            color: var(--success); font-size: 0.9rem; font-weight: 600;
         }
-        .logo-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #41a54e 0%, #2d7a35 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            box-shadow: 0 20px 40px rgba(65, 165, 94, 0.3);
+        .status-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .card {
+            background: var(--bg-card); border: 1px solid #e2e8f0; border-radius: 16px;
+            padding: 24px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .logo-icon i { font-size: 40px; color: white; }
-        .hero-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 15px;
-            letter-spacing: -0.02em;
+        h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+        .method {
+            display: inline-block; padding: 4px 12px; border-radius: 6px;
+            background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-size: 0.8rem; font-weight: 700;
         }
-        .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--secondary);
-            max-width: 500px;
-            margin: 0 auto;
+        .path { font-family: monospace; color: var(--text); font-size: 0.95rem; }
+        .desc { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
+        pre {
+            background: #1e293b; color: #a5f3fc; padding: 16px; border-radius: 8px;
+            font-size: 0.85rem; overflow-x: auto;
         }
-        .status-bar {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            padding: 8px 20px;
-            border-radius: 50px;
-            margin-top: 25px;
-        }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .status-text { color: var(--success); font-weight: 600; font-size: 0.9rem; }
-        .api-section { margin-top: 40px; }
-        .api-card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        .api-title {
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .api-title .badge {
-            background: var(--success);
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        .endpoint {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        .endpoint-method {
-            font-weight: 700;
-            font-size: 0.8rem;
-            padding: 4px 10px;
-            border-radius: 6px;
-            min-width: 60px;
-            text-align: center;
-        }
-        .method-get { background: rgba(59, 130, 246, 0.2); color: var(--info); }
-        .method-post { background: rgba(34, 197, 94, 0.2); color: var(--success); }
-        .endpoint-path { color: white; font-family: monospace; font-size: 0.95rem; }
-        .endpoint-desc { color: var(--secondary); font-size: 0.85rem; margin-top: 5px; }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-        .back-link:hover { color: white; }
-        .json-response {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 8px;
-            padding: 20px;
-            font-family: monospace;
-            font-size: 0.9rem;
-            color: #a5f3fc;
-            white-space: pre-wrap;
-            overflow-x: auto;
-        }
-        .footer { text-align: center; padding: 40px 0; color: var(--secondary); font-size: 0.85rem; }
-        @media (max-width: 768px) { .hero-title { font-size: 1.8rem; } }
+        .back { color: var(--primary); text-decoration: none; font-weight: 500; }
+        .back:hover { color: #4f46e5; }
+        footer { text-align: center; padding: 40px 0; color: var(--text-muted); font-size: 0.85rem; }
     </style>
 </head>
 <body>
-    <div class="container py-5">
-        <a href="http://localhost/" class="back-link">
-            <i class="bi bi-arrow-left"></i> Voltar ao Super XAMPP
+    <div class="container">
+        <a href="http://localhost/super-xampp/" class="back mb-4 d-inline-flex align-items-center gap-2">
+            <i class="bi bi-arrow-left"></i> Voltar
         </a>
-        <section class="hero-section">
-            <div class="logo-icon"><i class="bi bi-code-slash"></i></div>
-            <h1 class="hero-title">Node.js API</h1>
-            <p class="hero-subtitle">Runtime JavaScript server-side para APIs e aplicações backend.</p>
-            <div class="status-bar">
-                <span class="status-dot"></span>
-                <span class="status-text">Servidor online</span>
+        
+        <div class="header">
+            <div class="logo"><i class="bi bi-braces text-white"></i></div>
+            <h1>Node.js API</h1>
+            <p class="subtitle">Endpoints disponíveis</p>
+            <div class="status">
+                <span class="status-dot"></span> Online
             </div>
-        </section>
-        <section class="api-section">
-            <div class="api-card">
-                <h3 class="api-title">
-                    <i class="bi bi-database"></i>
-                    Endpoints Disponíveis
-                    <span class="badge">JSON</span>
-                </h3>
-                <div class="endpoint">
-                    <span class="endpoint-method method-get">GET</span>
-                    <div>
-                        <code class="endpoint-path">http://localhost:3000/</code>
-                        <p class="endpoint-desc">Esta página</p>
-                    </div>
-                </div>
-                <div class="endpoint">
-                    <span class="endpoint-method method-get">GET</span>
-                    <div>
-                        <code class="endpoint-path">http://localhost:3000/api/status</code>
-                        <p class="endpoint-desc">Status do servidor</p>
-                    </div>
-                </div>
-                <div class="endpoint">
-                    <span class="endpoint-method method-get">GET</span>
-                    <div>
-                        <code class="endpoint-path">http://localhost:3000/api/health</code>
-                        <p class="endpoint-desc">Health check</p>
-                    </div>
-                </div>
-                <div class="endpoint">
-                    <span class="endpoint-method method-get">GET</span>
-                    <div>
-                        <code class="endpoint-path">http://localhost:3000/api/info</code>
-                        <p class="endpoint-desc">Informações do sistema</p>
-                    </div>
-                </div>
+        </div>
+        
+        <div class="card">
+            <h3><i class="bi bi-list-ul"></i> Endpoints</h3>
+            <div class="mb-3">
+                <span class="method">GET</span>
+                <div class="path">/api/status</div>
+                <div class="desc">Status do servidor</div>
             </div>
-            <div class="api-card">
-                <h3 class="api-title"><i class="bi bi-terminal"></i> Exemplo de Resposta</h3>
-                <div class="json-response" id="example-response">Carregando...</div>
+            <div class="mb-3">
+                <span class="method">GET</span>
+                <div class="path">/api/time</div>
+                <div class="desc">Horário atual</div>
             </div>
-        </section>
-        <footer class="footer"><p>Node.js API - Super XAMPP</p></footer>
+            <div>
+                <span class="method">GET</span>
+                <div class="path">/api/random</div>
+                <div class="desc">Número aleatório</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3><i class="bi bi-terminal"></i> Exemplo</h3>
+            <pre id="output">Carregando...</pre>
+        </div>
+        
+        <footer>Node.js API • Super XAMPP</footer>
     </div>
     <script>
         fetch('/api/status')
             .then(r => r.json())
-            .then(data => {
-                document.getElementById('example-response').textContent = JSON.stringify(data, null, 2);
-            })
-            .catch(err => {
-                document.getElementById('example-response').textContent = JSON.stringify({error: err.message}, null, 2);
-            });
+            .then(d => document.getElementById('output').textContent = JSON.stringify(d, null, 2));
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>`;
 
-const JSON_HEADERS = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-};
+const HEADERS = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
 
-const server = http.createServer((req, res) => {
-    const url = req.url.split('?')[0];
+http.createServer((req, res) => {
+    const u = req.url.split('?')[0];
     
-    if (url === '/') {
+    if (u === '/') {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(HTML_CONTENT);
-    } else if (url === '/api/status') {
-        res.writeHead(200, JSON_HEADERS);
-        res.end(JSON.stringify({
-            status: 'online',
-            timestamp: new Date().toISOString(),
-            uptime: Math.floor(process.uptime()),
-            version: '1.0.0'
-        }));
-    } else if (url === '/api/health') {
-        res.writeHead(200, JSON_HEADERS);
-        res.end(JSON.stringify({ healthy: true, timestamp: new Date().toISOString() }));
-    } else if (url === '/api/info') {
-        res.writeHead(200, JSON_HEADERS);
-        res.end(JSON.stringify({
-            platform: process.platform,
-            nodeVersion: process.version,
-            pid: process.pid,
-            timestamp: new Date().toISOString()
-        }));
-    } else if (url === '/api/endpoints') {
-        res.writeHead(200, JSON_HEADERS);
-        res.end(JSON.stringify({
-            endpoints: [
-                { method: 'GET', path: '/', description: 'This page' },
-                { method: 'GET', path: '/api/status', description: 'Server status' },
-                { method: 'GET', path: '/api/health', description: 'Health check' },
-                { method: 'GET', path: '/api/info', description: 'System info' }
-            ]
-        }));
+        res.end(HTML);
+    } else if (u === '/api/status') {
+        res.writeHead(200, HEADERS);
+        res.end(JSON.stringify({ status: 'online', uptime: Math.floor(process.uptime()), version: '1.0.0' }));
+    } else if (u === '/api/time') {
+        res.writeHead(200, HEADERS);
+        res.end(JSON.stringify({ timestamp: new Date().toISOString(), unix: Date.now() }));
+    } else if (u === '/api/random') {
+        res.writeHead(200, HEADERS);
+        res.end(JSON.stringify({ number: Math.floor(Math.random() * 1000) }));
     } else {
-        res.writeHead(404, JSON_HEADERS);
-        res.end(JSON.stringify({ error: 'Endpoint not found' }));
+        res.writeHead(404, HEADERS);
+        res.end(JSON.stringify({ error: 'Not found' }));
     }
-});
-
-server.listen(PORT, () => {
-    console.log('Server running on port ' + PORT);
-});
+}).listen(PORT, () => console.log('Server on ' + PORT));
