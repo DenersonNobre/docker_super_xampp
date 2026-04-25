@@ -45,6 +45,10 @@ COPY config/server.js /var/www/html/server.js
 COPY config/sql-scripts /docker-entrypoint-initdb.d
 COPY ./htdocs /var/www/html
 
+# Permitir conexões MySQL remoto (sobrescreve bind-address do Ubuntu)
+RUN sed -i 's/bind-address.*=.*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf \
+    && sed -i 's/mysqlx-bind-address.*=.*127.0.0.1/mysqlx_bind_address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
+
 # Ajustes de permissões
 RUN chown -R root:root /opt/tomcat \
     && chmod -R 755 /opt/tomcat
