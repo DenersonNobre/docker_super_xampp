@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super XAMPP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --success: #22c55e;
+            --info: #3b82f6;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+        }
+        body { background: var(--bg); font-family: system-ui, sans-serif; color: var(--text); }
+        .header { text-align: center; padding: 60px 0 40px; }
+        .logo {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, #41a54e, #2d7a35);
+            border-radius: 20px; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px; font-size: 36px;
+        }
+        h1 { font-size: 2.5rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; }
+        .status {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 10px 24px; border-radius: 50px; margin-top: 24px;
+            color: var(--success); font-size: 0.95rem; font-weight: 600;
+        }
+        .status-dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .card {
+            background: var(--bg-card); border: 1px solid #e2e8f0; border-radius: 16px;
+            padding: 24px; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .service-icon {
+            width: 48px; height: 48px; border-radius: 12px; display: flex;
+            align-items: center; justify-content: center; font-size: 1.5rem;
+        }
+        .icon-apache { background: rgba(211, 65, 46, 0.1); color: #d3412e; }
+        .icon-mysql { background: rgba(0, 121, 183, 0.1); color: #0079b7; }
+        .icon-node { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .icon-tomcat { background: rgba(244, 119, 54, 0.1); color: #f47736; }
+        .icon-phpmyadmin { background: rgba(25, 90, 162, 0.1); color: #195aa2; }
+        .badge-success { background: var(--success); }
+        footer { text-align: center; padding: 40px 0; color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo"><i class="bi bi-lightning-charge text-white"></i></div>
+            <h1>Super XAMPP</h1>
+            <p class="subtitle">Ambiente de desenvolvimento completo</p>
+            <div class="status">
+                <span class="status-dot"></span> All Systems Online
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon icon-apache"><i class="bi bi-globe2"></i></div>
+                        <div>
+                            <h5 class="mb-1">Apache</h5>
+                            <p class="text-muted mb-0" style="font-size: 0.85rem;">Web Server</p>
+                        </div>
+                        <span class="badge badge-success ms-auto">Online</span>
+                    </div>
+                    <div class="d-flex align-items-center text-muted" style="font-size: 0.8rem;">
+                        <i class="bi bi-link-45deg me-1"></i> localhost:80
+                    </div>
+                    <a href="http://localhost" class="btn btn-outline-primary btn-sm mt-3">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> Acessar
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon icon-mysql"><i class="bi bi-database"></i></div>
+                        <div>
+                            <h5 class="mb-1">MySQL</h5>
+                            <p class="text-muted mb-0" style="font-size: 0.85rem;">Database</p>
+                        </div>
+                        <span class="badge badge-success ms-auto">Online</span>
+                    </div>
+                    <div class="d-flex align-items-center text-muted" style="font-size: 0.8rem;">
+                        <i class="bi bi-link-45deg me-1"></i> localhost:3306
+                    </div>
+                    <a href="http://localhost/phpmyadmin" class="btn btn-outline-primary btn-sm mt-3">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> phpMyAdmin
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon icon-node"><i class="bi bi-braces"></i></div>
+                        <div>
+                            <h5 class="mb-1">Node.js</h5>
+                            <p class="text-muted mb-0" style="font-size: 0.85rem;">API Server</p>
+                        </div>
+                        <span class="badge badge-success ms-auto">Online</span>
+                    </div>
+                    <div class="d-flex align-items-center text-muted" style="font-size: 0.8rem;">
+                        <i class="bi bi-link-45deg me-1"></i> localhost:3000
+                    </div>
+                    <a href="http://localhost:3000" class="btn btn-outline-success btn-sm mt-3">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> API Docs
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon icon-tomcat"><i class="bi bi-cloud"></i></div>
+                        <div>
+                            <h5 class="mb-1">Tomcat</h5>
+                            <p class="text-muted mb-0" style="font-size: 0.85rem;">Java Server</p>
+                        </div>
+                        <span class="badge badge-success ms-auto">Online</span>
+                    </div>
+                    <div class="d-flex align-items-center text-muted" style="font-size: 0.8rem;">
+                        <i class="bi bi-link-45deg me-1"></i> localhost:8080
+                    </div>
+                    <a href="http://localhost:8080" class="btn btn-outline-warning btn-sm mt-3">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> Acessar
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="service-icon icon-phpmyadmin"><i class="bi bi-table"></i></div>
+                        <div>
+                            <h5 class="mb-1">phpMyAdmin</h5>
+                            <p class="text-muted mb-0" style="font-size: 0.85rem;">MySQL Manager</p>
+                        </div>
+                        <span class="badge badge-success ms-auto">Online</span>
+                    </div>
+                    <div class="d-flex align-items-center text-muted" style="font-size: 0.8rem;">
+                        <i class="bi bi-link-45deg me-1"></i> Gerencie seus bancos
+                    </div>
+                    <a href="http://localhost/phpmyadmin" class="btn btn-outline-info btn-sm mt-3">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> Gerenciar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p class="mb-1">Super XAMPP • Docker</p>
+            <p style="font-size: 0.75rem;">Apache • MySQL • Node.js • Tomcat • phpMyAdmin</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

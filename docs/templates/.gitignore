@@ -1,0 +1,46 @@
+# Docker
+.dockerignore
+
+# Volumes (dados persistidos)
+mysql_data/
+
+# Compiled files
+*.class
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+/supervisor/
+/var/
+
+# Build artifacts
+*.tar.gz
+*.zip
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Environment
+.env
+.env.*
+
+# Node
+node_modules/
+npm-debug.log
+
+# Java
+*.jar
+*.war
+*.ear
+target/

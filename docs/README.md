@@ -1,83 +1,97 @@
-# Como Continuar Este Projeto
+# Como Recriar Este Projeto do Zero
 
 ## Para IA ou Desenvolvedor
 
-### Passo 1: Clone o Repositório
-
-```bash
-git clone https://github.com/DenersonNobre/docker_super_xampp.git
-cd docker_super_xampp
-git checkout develop
-```
-
-### Passo 2: Leia Esta Pasta (docs/)
+### Comece Aqui
 
 ```
 docs/
-├── SETUP-GIT.md          ← Comece aqui! Config Git e regras
-├── 00-PLANO-EXECUCAO.md  ← Visão geral do projeto
-├── 01-ETAPA-FUNDACAO.md  ← Tecnologias escolhidas
-├── 02-ETAPA-CONTAINER.md ← Dockerfile e compose
-├── 03-ETAPA-SERVICOS.md  ← Como cada serviço funciona
-├── 04-ETAPA-INTERFACE.md ← Páginas web
-├── 05-ETAPA-DEBUGGING.md ← Problemas já resolvidos
-├── 06-ETAPA-MYSQL-REMOTO.md ← MySQL para Workbench
-└── 07-CHECKLIST.md       ← Testes de verificação
+├── templates/              ← Arquivos prontos para copiar
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   ├── config/
+│   │   ├── entrypoint.sh
+│   │   ├── my.cnf
+│   │   ├── supervisord.conf
+│   │   └── server.js
+│   ├── htdocs/super-xampp/
+│   │   └── index.html
+│   ├── test.sh
+│   └── test-host.ps1
+├── SETUP-GIT.md            ← Setup Git
+└── README.md               ← (este)
 ```
 
-### Passo 3: Teste o Ambiente
+### Passo a Passo
 
-**No container:**
-```bash
-docker exec super_xampp /bin/bash /test.sh
+1. **Criar pasta do projeto**
+   ```bash
+   mkdir super-xampp && cd super-xampp
+   mkdir config htdocs/super-xampp mysql_data
+   ```
+
+2. **Copiar arquivos de `docs/templates/`**
+
+3. **Build**
+   ```bash
+   docker-compose build
+   docker-compose up -d
+   ```
+
+4. **Aguardar** (MySQL demora ~30s para iniciar)
+   ```bash
+   sleep 30
+   ```
+
+5. **Testar**
+   ```bash
+   docker exec super_xampp /test.sh
+   ```
+
+### O Que Está Incluído
+
+- ✅ Ubuntu 22.04 base
+- ✅ Apache2 + PHP
+- ✅ MySQL 8.x com TCP remoto
+- ✅ Node.js 24.x API
+- ✅ Tomcat 11.x
+- ✅ phpMyAdmin
+- ✅ Landing page Bootstrap 5
+- ✅ Scripts de teste
+
+### Estrutura Final
+
+```
+super-xampp/
+├── config/
+│   ├── entrypoint.sh
+│   ├── my.cnf
+│   ├── supervisord.conf
+│   └── server.js
+├── htdocs/super-xampp/
+│   └── index.html
+├── Dockerfile
+├── docker-compose.yml
+├── .gitignore
+└── mysql_data/
 ```
 
-**No host Windows:**
-```powershell
-.\docs\test-host.ps1
-```
+### Serviços e Portas
 
-### Passo 4: Verifique Status
+| Serviço | Porta | URL |
+|---------|-------|-----|
+| Apache | 80 | http://localhost |
+| MySQL | 3306 | localhost:3306 |
+| Node.js | 3000 | http://localhost:3000 |
+| Tomcat | 8080 | http://localhost:8080 |
+| phpMyAdmin | - | http://localhost/phpmyadmin |
 
-```bash
-git status
-docker ps | grep super_xampp
-```
+### Credenciais
 
-## Fluxo de Trabalho
+- **MySQL root**: `root` / `root`
+- **MySQL Workbench**: conecta em `localhost:3306`
+- **phpMyAdmin**: `root` / `root`
 
-```
-1. Leia docs/
-2. Entenda a estrutura atual
-3. Faça mudanças
-4. Teste localmente
-5. Documente (ATUALIZE docs/ se necessário)
-6. Commit com mensagem clara
-7. Push para develop
-```
+### Problemas?
 
-## Regras Importantes
-
-1. **SEMPRE atualize documentação** antes de push
-2. **Commite código testado** (não quebrado)
-3. **Use mensagens descritivas** nos commits
-4. **Teste após mudanças** (`test.sh` ou `test-host.ps1`)
-
-## Onde Estou Agora
-
-- Container: `super_xampp` rodando
-- Todos os 23 testes passando
-- Branch: `develop`
-- Última modificação: scripts de teste adicionados
-
-## Tecnologias
-
-- Ubuntu 22.04 / Docker
-- Apache, MySQL, Node.js, Tomcat, phpMyAdmin
-- Bootstrap 5 (tema claro)
-
-## Dúvidas?
-
-Consulte [05-ETAPA-DEBUGGING.md](05-ETAPA-DEBUGGING.md) para problemas já resolvidos.
-
-Ver [07-CHECKLIST.md](07-CHECKLIST.md) para verificação completa.
+Consulte [05-ETAPA-DEBUGGING.md](05-ETAPA-DEBUGGING.md)
