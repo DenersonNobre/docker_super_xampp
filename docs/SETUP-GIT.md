@@ -169,4 +169,4 @@ cat docs/00-PLANO-EXECUCAO.md  # Comece aqui!
 
 ## Próximo Passo
 
-Ver [docs/00-PLANO-EXECUCAO.md](docs/00-PLANO-EXECUCAO.md)
+Ver [00-PLANO-EXECUCAO.md](00-PLANO-EXECUCAO.md)

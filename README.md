@@ -4,7 +4,7 @@ Ambiente de desenvolvimento Docker completo com Apache, MySQL, Node.js, Tomcat e
 
 ## Comece Aqui
 
-1. [SETUP-GIT.md](SETUP-GIT.md) - Setup do repositório Git
+1. [docs/SETUP-GIT.md](docs/SETUP-GIT.md) - Setup do repositório Git
 2. [docs/00-PLANO-EXECUCAO.md](docs/00-PLANO-EXECUCAO.md) - Plano de execução completo
 
 ## Serviços

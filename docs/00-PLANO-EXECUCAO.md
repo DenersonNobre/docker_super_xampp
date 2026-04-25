@@ -8,6 +8,7 @@ Criar uma imagem Docker que funcione como alternativa moderna ao XAMPP, com Apac
 
 ```
 docs/
+├── SETUP-GIT.md             # Setup Git e regras de commit
 ├── 00-PLANO-EXECUCAO.md     # Visão geral e fluxo (este)
 ├── 01-ETAPA-FUNDACAO.md     # Setup inicial e tecnologias
 ├── 02-ETAPA-CONTAINER.md    # Dockerfile e docker-compose
@@ -21,10 +22,9 @@ docs/
 ## Fluxo de Execução
 
 ```
-01-FUNDACAO → 02-CONTAINER → 03-SERVICOS → 04-INTERFACE → 05-DEBUGGING → 06-MYSQL → 07-CHECKLIST
-      ↓              ↓             ↓              ↓              ↓           ↓          ↓
-   Ubuntu 22.04   dockerfiles   Apache/MySQL   Bootstrap UI    Fixes      Workbench   Testes
-                   compose      Node/Tomcat    Landing page    Logs       TCP IP
+SETUP-GIT → 00-PLANO → 01-FUNDACAO → 02-CONTAINER → 03-SERVICOS → 04-INTERFACE → 05-DEBUGGING → 06-MYSQL → 07-CHECKLIST
+   ↓           ↓            ↓              ↓             ↓              ↓              ↓           ↓          ↓
+ Git init    Overview    Ubuntu 22    dockerfiles   Apache/MySQL   Bootstrap UI    Fixes      Workbench   Testes
 ```
 
 ## Tecnologias Escolhidas
