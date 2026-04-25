@@ -1,33 +1,54 @@
 # Docker
-*.dockerignore
-.docker/
+.dockerignore
 
-# Dados MySQL (grandes binaries)
+# Volumes (dados persistidos)
 mysql_data/
 
-# Build outputs
-node_modules/
-
-# Logs
-*.log
-
-# OS
-.DS_Store
-Thumbs.db
+# Compiled files
+*.class
+*.pyc
+*.pyo
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-*~
 
-# Secrets (não commitar)
-.env
-*.pem
-*.key
+# OS
+.DS_Store
+Thumbs.db
 
-# temporary files
+# Logs
+*.log
+/supervisor/
+/var/
+
+# Build artifacts
+*.tar.gz
+*.zip
+
+# Temporary files
 tmp/
 temp/
 *.tmp
+
+# Environment (sensível)
+.env
+.env.*
+
+# Node (se usar)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Java
+*.jar
+*.war
+*.ear
+target/
+
+# Build do Docker
+*.egg-info/
+dist/
+build/

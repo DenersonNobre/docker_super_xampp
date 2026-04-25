@@ -2,6 +2,11 @@
 
 Ambiente de desenvolvimento Docker completo com Apache, MySQL, Node.js, Tomcat e phpMyAdmin.
 
+## Comece Aqui
+
+1. [SETUP-GIT.md](SETUP-GIT.md) - Setup do repositório Git
+2. [docs/00-PLANO-EXECUCAO.md](docs/00-PLANO-EXECUCAO.md) - Plano de execução completo
+
 ## Serviços
 
 | Serviço      | Porta  | URL                           |
