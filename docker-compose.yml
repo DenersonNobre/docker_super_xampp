@@ -11,8 +11,6 @@ services:
       - "3000:3000"
     volumes:
       - A:/Desenvolvimento/Docker/xampp_server/mysql_data:/var/lib/mysql
-      - A:/Desenvolvimento/Docker/xampp_server/tomcat_webapps:/opt/tomcat/webapps
 
 volumes:
   mysql_data:
-  tomcat_webapps:
