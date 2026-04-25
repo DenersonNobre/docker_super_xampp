@@ -47,7 +47,8 @@ if [ ! -f "/var/lib/mysql/.password_set" ]; then
     done
     
     echo "Configurando MySQL..."
-    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;"
+    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
+    mysql -u root -proot -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
     mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS phpmyadmin;"
     mysql -u root -proot phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
     mysql -u root -proot -e "GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'root'@'localhost'; FLUSH PRIVILEGES;"
